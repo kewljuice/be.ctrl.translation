@@ -1,0 +1,12 @@
+#
+msgid ""
+msgstr ""
+
+msgid "Translation from javascript"
+msgstr ""
+
+msgid "be.ctrl.translation"
+msgstr ""
+
+msgid "Translation from tpl"
+msgstr ""
