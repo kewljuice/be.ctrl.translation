@@ -2,6 +2,9 @@
 msgid ""
 msgstr ""
 
+msgid "Translation from php"
+msgstr ""
+
 msgid "Translation from javascript"
 msgstr ""
 

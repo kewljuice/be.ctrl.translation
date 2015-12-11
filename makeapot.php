@@ -44,12 +44,12 @@ class MakeAPot {
 		$folder = $this->getDirContents($this->folder_string);
 		foreach($folder as $key => $file) {
 			if(is_file($file)) {
+				// File content.
 				$string = file_get_contents($file);
-				$file_type = 'template';
+				// Check file extension.
 				$extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-				if($extension == 'js') { $file_type = 'javascript';	}	
 				// Get translations between tags.
-				$this->getTextBetweenTags($string,$file_type);	
+				$this->getTextBetweenTags($string,$extension);	
 			}
 		}
 		// Write the .pot file.
@@ -60,23 +60,30 @@ class MakeAPot {
 	function getTextBetweenTags($string, $file_type) {
 		// Get text(s).
 		$array = $this->getArray();
-		// Get text for 'template' files.
-		if($file_type == 'template') {
+		$pattern = "";
+		// Set pattern for'php' files.
+		if($file_type == 'php') {
 			// Create pattern.
-			$pattern = "/{ts [a-zA-Z0-9=$\. ]{0,}domain='".$this->domain_string."'}(.*?){\/ts}/"; 
-			// Match pattern.
-			preg_match_all($pattern, $string, $match);
-			foreach($match[1] as $value) {
-				// Skip empty tags.
-				if($value != '') { $array[] = $value; }
-			}
+			$part1 = "(ts\('(.*?)')";
+			$part2 = '(ts\("(.*?)")';
+			$pattern = '/' . $part1 . '|' . $part1 .  '/';
+		} 		
+		// Set pattern for'template' files.
+		if($file_type == 'tpl') {
+			// Create pattern.
+			// $part1 = "({ts [a-zA-Z0-9=$\. ]{0,}domain='".$this->domain_string."'}(.*?){\/ts})"; 
+			$part1 = "({ts.*}(.*?){\/ts})";
+			$pattern = '/' . $part1 . '/';
 		} 
-		// Get text for 'javascript' files.
-		if ($file_type == 'javascript') { 
+		// Set pattern for 'javascript' files.
+		if ($file_type == 'js') { 
 			// Create pattern.
-			$part1 = "(ts\(\'(.*)('\)|'\,))";
-			$part2 = '(ts\(\"(.*)("\)|"\,))';
+			$part1 = "(ts\('(.*?)')";
+			$part2 = '(ts\("(.*?)")';
 			$pattern = '/' . $part1 . '|'. $part2 . '/';
+		}
+		// Execute pattern.
+		if($pattern != "") {
 			// Match pattern.
 			preg_match_all($pattern, $string, $match);
 			foreach($match[2] as $value) {

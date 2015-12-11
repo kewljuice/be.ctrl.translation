@@ -120,6 +120,7 @@ function translation_civicrm_buildForm($formName, &$form) {
  * pagerun
  */
 function translation_civicrm_pageRun( &$page ) {
+	// http://wiki.civicrm.org/confluence/display/CRMDOC/Extension+translation
 	// pageRun
 	if(get_class($page) == 'CRM_translation_Page_translation') {
 		// include script
