@@ -9,20 +9,17 @@
  * should be 'use strict';
  */
  
-  
-cj(function ($, ts) {
+(function($, ts) {
 	'use strict';
 	
 	// log
-	console.log("translation js loaded 2015" + ts('Translation from javascript single quote'));
-	
-	// CRM alert
-	window.alert(ts('Translation from javascript single quote'));
-	window.alert(ts("Translation from javascript double quote"));
-	
-	// fill div
-	var div = document.getElementById('divjs');
-	div.innerHTML = div.innerHTML + ts("Translation from javascript double quote");
-	
-}(CRM.$, CRM.ts('be.ctrl.translation')));
+	console.log("be.ctrl.translation/js/script.js");
 
+	// fill div
+	$('div#divjs').append(ts("Translation from javascript double quote"));
+  $('div#divjs').on('click', function() {
+    // CRM alert
+		alert(ts('Translation from javascript single quote'));
+		alert(ts("Translation from javascript double quote"));
+  });
+})(CRM.$, CRM.ts('be.ctrl.translation'));
