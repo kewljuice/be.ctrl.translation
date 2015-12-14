@@ -9,7 +9,7 @@
  * should be 'use strict';
  */
  
-(function($, ts) {
+(function($, _, ts) {
 	'use strict';
 	
 	// log
@@ -22,4 +22,4 @@
 		alert(ts('Translation from javascript single quote'));
 		alert(ts("Translation from javascript double quote"));
   });
-})(CRM.$, CRM.ts('be.ctrl.translation'));
+})(CRM.$, CRM._, CRM.ts('be.ctrl.translation'));
