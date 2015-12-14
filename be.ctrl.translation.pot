@@ -2,13 +2,19 @@
 msgid ""
 msgstr ""
 
-msgid "Translation from php"
+msgid "Translation from php single quotes"
 msgstr ""
 
-msgid "Translation from javascript"
+msgid "Translation from php double quotes"
+msgstr ""
+
+msgid "Translation from javascript single quote"
 msgstr ""
 
 msgid "be.ctrl.translation"
+msgstr ""
+
+msgid "Translation from javascript double quote"
 msgstr ""
 
 msgid "Translation from tpl"

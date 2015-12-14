@@ -66,14 +66,15 @@ class MakeAPot {
 			// Create pattern.
 			$part1 = "(ts\('(.*?)')";
 			$part2 = '(ts\("(.*?)")';
-			$pattern = '/' . $part1 . '|' . $part1 .  '/';
+			$pattern = '/' . $part1 . '|' . $part2 . '/';
 		} 		
 		// Set pattern for'template' files.
 		if($file_type == 'tpl') {
 			// Create pattern.
 			// $part1 = "({ts [a-zA-Z0-9=$\. ]{0,}domain='".$this->domain_string."'}(.*?){\/ts})"; 
 			$part1 = "({ts.*}(.*?){\/ts})";
-			$pattern = '/' . $part1 . '/';
+			$part2 = "({ts.*}(.*?){\/ts})";
+			$pattern = '/' . $part1 . '|' . $part2 . '/';
 		} 
 		// Set pattern for 'javascript' files.
 		if ($file_type == 'js') { 
@@ -86,10 +87,16 @@ class MakeAPot {
 		if($pattern != "") {
 			// Match pattern.
 			preg_match_all($pattern, $string, $match);
+			// results part1
 			foreach($match[2] as $value) {
 				// Skip empty tags.
 				if($value != '') { $array[] = $value; }
 			}
+			// results part2
+			foreach($match[4] as $value) {
+				// Skip empty tags.
+				if($value != '') { $array[] = $value; }
+			}			
 		}
 		// Return text(s).
 	  $this->setArray($array);
