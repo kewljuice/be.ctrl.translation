@@ -8,18 +8,21 @@
  * ES5 specifies that the first line inside our closure
  * should be 'use strict';
  */
-/*jslint indent: 2 */
-/*global CRM, cj, ts */
  
+  
 cj(function ($, ts) {
-  'use strict';
+	'use strict';
 	
 	// log
-	console.log("translation js loaded 2015");
-	console.log(document.getElementById("divjs"));
+	console.log("translation js loaded 2015" + ts('Translation from javascript single quote'));
+	
+	// CRM alert
+	window.alert(ts('Translation from javascript single quote'));
+	window.alert(ts("Translation from javascript double quote"));
 	
 	// fill div
 	var div = document.getElementById('divjs');
-	div.innerHTML = div.innerHTML + ts('Translation from javascript');
+	div.innerHTML = div.innerHTML + ts("Translation from javascript double quote");
 	
 }(CRM.$, CRM.ts('be.ctrl.translation')));
+

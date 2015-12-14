@@ -124,7 +124,7 @@ function translation_civicrm_pageRun( &$page ) {
 	// pageRun
 	if(get_class($page) == 'CRM_translation_Page_translation') {
 		// include script
-		CRM_Core_Resources::singleton()->addScriptFile('be.ctrl.translation', 'js/script.js', 10, 'page-footer');
+		CRM_Core_Resources::singleton()->addScriptFile('be.ctrl.translation', 'js/script.js');
 	}
 }
 
