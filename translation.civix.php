@@ -9,22 +9,25 @@
  */
 function _translation_civix_civicrm_config(&$config = NULL) {
   static $configured = FALSE;
-  if ($configured) return;
+  if ($configured) {
+    return;
+  }
   $configured = TRUE;
 
   $template =& CRM_Core_Smarty::singleton();
 
-  $extRoot = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+  $extRoot = dirname(__FILE__) . DIRECTORY_SEPARATOR;
   $extDir = $extRoot . 'templates';
 
-  if ( is_array( $template->template_dir ) ) {
-      array_unshift( $template->template_dir, $extDir );
-  } else {
-      $template->template_dir = array( $extDir, $template->template_dir );
+  if (is_array($template->template_dir)) {
+    array_unshift($template->template_dir, $extDir);
+  }
+  else {
+    $template->template_dir = array($extDir, $template->template_dir);
   }
 
-  $include_path = $extRoot . PATH_SEPARATOR . get_include_path( );
-  set_include_path( $include_path );
+  $include_path = $extRoot . PATH_SEPARATOR . get_include_path();
+  set_include_path($include_path);
 }
 
 /**
@@ -113,9 +116,10 @@ function _translation_civix_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) 
  * @return CRM_translation_Upgrader
  */
 function _translation_civix_upgrader() {
-  if (!file_exists(__DIR__.'/CRM/translation/Upgrader.php')) {
+  if (!file_exists(__DIR__ . '/CRM/translation/Upgrader.php')) {
     return NULL;
-  } else {
+  }
+  else {
     return CRM_translation_Upgrader_Base::instance();
   }
 }
@@ -148,7 +152,8 @@ function _translation_civix_find_files($dir, $pattern) {
       while (FALSE !== ($entry = readdir($dh))) {
         $path = $subdir . DIRECTORY_SEPARATOR . $entry;
         if ($entry{0} == '.') {
-        } elseif (is_dir($path)) {
+        }
+        elseif (is_dir($path)) {
           $todos[] = $path;
         }
       }
@@ -157,6 +162,7 @@ function _translation_civix_find_files($dir, $pattern) {
   }
   return $result;
 }
+
 /**
  * (Delegated) Implementation of hook_civicrm_managed
  *
@@ -236,25 +242,30 @@ function _translation_civix_insert_navigation_menu(&$menu, $path, $item, $parent
 
   // If we are done going down the path, insert menu
   if (empty($path)) {
-    if (!$navId) $navId = CRM_Core_DAO::singleValueQuery("SELECT max(id) FROM civicrm_navigation");
-    $navId ++;
-    $menu[$navId] = array (
+    if (!$navId) {
+      $navId = CRM_Core_DAO::singleValueQuery("SELECT max(id) FROM civicrm_navigation");
+    }
+    $navId++;
+    $menu[$navId] = array(
       'attributes' => array_merge($item, array(
-        'label'      => CRM_Utils_Array::value('name', $item),
-        'active'     => 1,
-        'parentID'   => $parentId,
-        'navID'      => $navId,
+        'label' => CRM_Utils_Array::value('name', $item),
+        'active' => 1,
+        'parentID' => $parentId,
+        'navID' => $navId,
       ))
     );
-    return true;
-  } else {
+    return TRUE;
+  }
+  else {
     // Find an recurse into the next level down
-    $found = false;
+    $found = FALSE;
     $path = explode('/', $path);
     $first = array_shift($path);
     foreach ($menu as $key => &$entry) {
       if ($entry['attributes']['name'] == $first) {
-        if (!$entry['child']) $entry['child'] = array();
+        if (!$entry['child']) {
+          $entry['child'] = array();
+        }
         $found = _translation_civix_insert_navigation_menu($entry['child'], implode('/', $path), $item, $key);
       }
     }
@@ -269,11 +280,13 @@ function _translation_civix_insert_navigation_menu(&$menu, $path, $item, $parent
  */
 function _translation_civix_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
   static $configured = FALSE;
-  if ($configured) return;
+  if ($configured) {
+    return;
+  }
   $configured = TRUE;
 
   $settingsDir = __DIR__ . DIRECTORY_SEPARATOR . 'settings';
-  if(is_dir($settingsDir) && !in_array($settingsDir, $metaDataFolders)) {
+  if (is_dir($settingsDir) && !in_array($settingsDir, $metaDataFolders)) {
     $metaDataFolders[] = $settingsDir;
   }
 }

@@ -46,7 +46,7 @@ function translation_civicrm_uninstall() {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
 function translation_civicrm_enable() {
-	// continue
+  // continue
   _translation_civix_civicrm_enable();
 }
 
@@ -57,7 +57,7 @@ function translation_civicrm_enable() {
  */
 function translation_civicrm_disable() {
   // continue
-	_translation_civix_civicrm_disable();
+  _translation_civix_civicrm_disable();
 }
 
 /**
@@ -113,19 +113,20 @@ function translation_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
  * buildform
  */
 function translation_civicrm_buildForm($formName, &$form) {
-	// set buildForm
+  // set buildForm
 }
 
 /**
  * pagerun
  */
-function translation_civicrm_pageRun( &$page ) {
-	// http://wiki.civicrm.org/confluence/display/CRMDOC/Extension+translation
-	// pageRun
-	if(get_class($page) == 'CRM_translation_Page_translation') {
-		// include script
-		CRM_Core_Resources::singleton()->addScriptFile('be.ctrl.translation', 'js/script.js');
-	}
+function translation_civicrm_pageRun(&$page) {
+  // http://wiki.civicrm.org/confluence/display/CRMDOC/Extension+translation
+  // pageRun
+  if (get_class($page) == 'CRM_translation_Page_translation') {
+    // include script
+    CRM_Core_Resources::singleton()
+      ->addScriptFile('be.ctrl.translation', 'js/script.js');
+  }
 }
 
  
